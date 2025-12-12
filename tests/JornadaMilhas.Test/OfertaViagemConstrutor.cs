@@ -57,13 +57,15 @@ namespace JornadaMilhas.Test
             Assert.False(oferta.EhValido);
         }
 
-        [Fact]
-        public void RetornaMensagemDeErroQuandoPrecoForNegativo()
+        //[Fact]
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-100.00)]
+        public void RetornaMensagemDeErroDePrecoInvalidoQuandoPrecoMenorQueZero(double preco)
         {
             //Arrange
             Rota rota = new Rota("OrigemTeste", "DestinoTeste");
             Periodo periodo = new Periodo(DateTime.Now.AddDays(10), DateTime.Now.AddDays(20));
-            double preco = -500.00;
 
             //Act
             OfertaViagem oferta = new OfertaViagem(rota, periodo, preco);
