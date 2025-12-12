@@ -22,15 +22,15 @@ namespace JornadaMilhas.Test
             Assert.Equal(precoComDesconto, oferta.Preco);
         }
 
-        [Fact]
-        public void RetornaDescontoMaximoQuandoValorDescontoMaiorQuePreco()
+        [Theory]
+        [InlineData(120, 30)]
+        [InlineData(100, 30)]
+        public void RetornaDescontoMaximoQuandoValorDescontoMaiorOuIgualPreco(double desconto, double precoComDesconto)
         {
             //Arrange
             Rota rota = new Rota("OrigemTeste", "DestinoTeste");
             Periodo periodo = new Periodo(DateTime.Now.AddDays(10), DateTime.Now.AddDays(20));
             double precoOriginal = 100.00;
-            double desconto = 120.00; // 15%
-            double precoComDesconto = 30;
             OfertaViagem oferta = new OfertaViagem(rota, periodo, precoOriginal);
 
             //Act
